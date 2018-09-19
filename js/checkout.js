@@ -15,7 +15,6 @@ function Checkout() {
     this.pricingrules = pricingRules;
     this.cart =[];
  }
-
  Checkout.prototype.scan = function (item) {
     // si no tengo de ese producto lo añado, si no, subo su quantity
     if  (this.getProductfromCart(item)){
@@ -26,36 +25,23 @@ function Checkout() {
     return this;
  };
 
-
-
 Checkout.prototype.total = function () {
-    // aplico el descuento 2X1 en vouchers
-//     let total=0;
-//    this.cart.forEach((i)=>{
-
-//    });
-
-//    switch (i.code) {
-//        case :
-           
-//            break;
-   
-//        default:
-//            break;
-//    }
-   let vouchersTotal = this.twoByOneDiscount("VOUCHER");
-   console.log(vouchersTotal)
-   // aplico el descuento por mas de 3 items a tshirt
-   let tshirtsTotal=this.bulkDiscount("TSHIRT");
-   console.log(tshirtsTotal)
-   // precio de mugs sin descuento
-   let mugsTotal =this.regularPrice("MUG") ;
-
-
-
-   return vouchersTotal+tshirtsTotal+mugsTotal;
+   let total=0;
+   this.cart.forEach((i)=>{
+    switch (this.getProductfromPricingRules(i.code).discount) {
+        case "2x1":
+            total+=this.twoByOneDiscount(i.code);
+            break;
+        case "+3":
+            total+=this.bulkDiscount(i.code);
+            break;
+        default:
+            total+=this.regularPrice(i.code);
+            break;
+    }
+   });
+return total;
 };
-
 Checkout.prototype.getProductfromCart = function(item){
     return this.cart.filter(function(i){return i.code==item})[0];
 }

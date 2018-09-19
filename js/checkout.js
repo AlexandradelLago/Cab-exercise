@@ -6,70 +6,90 @@
 // TSHIRT       | Cabify T-Shirt      |  20.00€
 // MUG          | Cafify Coffee Mug   |   7.50€
 
-
-let pricingRules=[{"code":"VOUCHER", "name":"Cabify Voucher", "price":5},
-{"code":"TSHIRT", "name":"Cabify T-shirt", "price":20},
-{"code":"MUG", "name":"Cabify Mug", "price":7.5}];
+// he añadido un atributo a los objetos articulos de descuento que me indica que tipo de descuento debo aplicar
+let pricingRules=[{"code":"VOUCHER", "name":"Cabify Voucher", "price":5, "discount":"2x1"},
+{"code":"TSHIRT", "name":"Cabify T-shirt", "price":20, "discount":"+3", "priceMoreThan3":19},
+{"code":"MUG", "name":"Cabify Mug","discount":"no", "price":7.5}];
 
 function Checkout() {
     this.pricingrules = pricingRules;
     this.cart =[];
-    this.totalPrice=0;
-
  }
 
  Checkout.prototype.scan = function (item) {
-    // añado un nuevo producto a mi checkout - para ello busco que producto es de mi pricing rules
-    var newproduct = this.pricingrules.filter(function(p){
-        return p.code==item;
-    })[0];
     // si no tengo de ese producto lo añado, si no, subo su quantity
-    if (this.cart.filter(function (i){return i.code==newproduct.code})[0]){
-        this.cart.filter(function (i){return i.code==newproduct.code})[0].quantity++;
+    if  (this.getProductfromCart(item)){
+        (this.getProductfromCart(item)).quantity++;
     }else{
         this.cart.push({code:item,quantity:1});
     }
     return this;
  };
 
+
+
+Checkout.prototype.total = function () {
+    // aplico el descuento 2X1 en vouchers
+//     let total=0;
+//    this.cart.forEach((i)=>{
+
+//    });
+
+//    switch (i.code) {
+//        case :
+           
+//            break;
+   
+//        default:
+//            break;
+//    }
+   let vouchersTotal = this.twoByOneDiscount("VOUCHER");
+   console.log(vouchersTotal)
+   // aplico el descuento por mas de 3 items a tshirt
+   let tshirtsTotal=this.bulkDiscount("TSHIRT");
+   console.log(tshirtsTotal)
+   // precio de mugs sin descuento
+   let mugsTotal =this.regularPrice("MUG") ;
+
+
+
+   return vouchersTotal+tshirtsTotal+mugsTotal;
+};
+
+Checkout.prototype.getProductfromCart = function(item){
+    return this.cart.filter(function(i){return i.code==item})[0];
+}
+Checkout.prototype.getProductfromPricingRules= function (item){
+    return this.pricingrules.filter(function(r){return r.code==item})[0];
+}
 //  * The marketing department believes in 2-for-1 promotions (buy two of the same product, get one free), 
 //  * and would like for there to be a 2-for-1 special on `VOUCHER` items.
-
+//  HE creado un metodo de descuento 2 por uno por si en el futuro queremos aplicarselo a otros productos
+Checkout.prototype.twoByOneDiscount = function (i){
+    let items= this.getProductfromCart(i)
+    let itemsTotal= Math.floor((items.quantity/2))+items.quantity%2;
+    return itemsTotal*this.getProductfromPricingRules(i).price? itemsTotal*this.getProductfromPricingRules(i).price:0;
+}
 //  * The CFO insists that the best way to increase sales is with discounts on bulk purchases
 //  *  (buying x or more of a product, the price of that product is reduced), and demands that if you buy 3 or more 
 //  * `TSHIRT` items, the price per unit should be 19.00€.
-
- Checkout.prototype.total = function () {
-     // nuero de vouchers que tengo en mi checkout y si es divisible por 2, aplico el dos por uno y los que sobre lo añado
-    let vouchers= this.getProduct("VOUCHER")
-    let vouchersTotal= Math.floor((vouchers.quantity/2))+vouchers.quantity%2;
-    let vouchersPrice=vouchersTotal*this.getPrice("VOUCHER");
-    // filtro el numero de camisetas que tengo
-    let tshirts= this.getProduct("TSHIRT");
-    let tshirtsPrice=0;
-    let mugsPrice=0;
+// creo metodo tambien por la misma razon que arriba
+Checkout.prototype.bulkDiscount = function (i){
+    let items= this.getProductfromCart(i);
     // compruebo si tengo 3 o mas de tres en mi  checkout para aplicar el precio de descuento o no
-    if (tshirts&&tshirts.quantity>=3){
-       tshirtsPrice=tshirts.quantity*19;
-    }else if (tshirts){
-       tshirtsPrice=tshirts.quantity*this.getPrice("TSHIRT");
-    };
-
-    // filtro los mugs que adquiero y los multiplico por su precio
-    let mugs=this.getProduct("MUG");
-    if(mugs!=undefined){
-       mugsPrice=mugs.quantity*this.pricingrules.filter(function(r){return r.code=="MUG"})[0].price;
+    if (items&&items.quantity>=3){
+      return items.quantity*this.getProductfromPricingRules(i).priceMoreThan3;
+    }else if(items&&items.quantity<3&&items.quantity>0){
+      return items.quantity*this.getProductfromPricingRules(i).price;
+    }else{
+        return 0;
     }
-    return vouchersPrice+tshirtsPrice+mugsPrice;
- };
-
- Checkout.prototype.getProduct = function(item){
-    return this.cart.filter(function(i){return i.code==item})[0];
 }
-
-Checkout.prototype.getPrice= function (item){
-    return this.pricingrules.filter(function(r){return r.code==item})[0].price;
+Checkout.prototype.regularPrice = function (i){
+    let mugs=this.getProductfromCart(i);
+    if(mugs!=undefined){
+       return mugs.quantity*this.getProductfromPricingRules(i).price;
+    }else{
+        return 0;
+    }
 }
-
-
-

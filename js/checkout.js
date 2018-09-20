@@ -9,8 +9,6 @@
 // he añadido un atributo a los objetos articulos de descuento que me indica que tipo de descuento debo aplicar
 // para hacer los descuentos más escalables he añadido la variable "amount" que en el caso de xby1 es la x y en el caso de bulk es 
 //la minima cantidad a comprar para que se aplique el descuento
-// { Type: DiscountType.Multiplier, Amount: 2 }
-// { Type: DiscountType.Discounter, Amount: 3 }
 
 let pricingRules=[{"code":"VOUCHER", "name":"Cabify Voucher", "price":5, "discount":{"type":"xby1", "amount":2}},
 {"code":"TSHIRT", "name":"Cabify T-shirt", "price":20, "discount":{"type":"bulk", "amount":3},"priceMoreThanX":19},

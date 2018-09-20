@@ -25,9 +25,10 @@ input {
     width: 50%;
   }
   .container {
-      width: 100%;
+      width: 80%;
       margin: 0 auto;
       text-align: center;
+      background: white;
   }
   .info-container {
       text-align: center;

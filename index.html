@@ -36,7 +36,7 @@
                     <span class="total-price" name="total-price">$0.00</span>
                 </div>
                 <div class="col">
-                    <button id="btnTshirt" class="btn"  onclick="add('voucher')"><i class="fas fa-plus-circle"></i></button>
+                    <button id="btnTshirt" class="btn btn-succes"  onclick="add('voucher')"><i class="fas fa-plus-circle"></i></button>
                     <button class="btn btn-delete"><i class="fas fa-minus-circle" onclick="minus('voucher')" aria-hidden="true"></i></button>
                 </div>
             </div>
@@ -55,7 +55,7 @@
                     <span class="total-price" name="total-price">$0.00</span>
                 </div>
                 <div class="col">
-                    <button id="btnTshirt" class="btn"  onclick="add('mug')"><i class="fas fa-plus-circle"></i></button>
+                    <button id="btnTshirt" class="btn btn-succes"  onclick="add('mug')"><i class="fas fa-plus-circle"></i></button>
                     <button class="btn btn-delete"><i class="fas fa-minus-circle"  onclick="minus('mug')" aria-hidden="true"></i></button>
                 </div>
             </div>
@@ -74,14 +74,14 @@
                     <span class="total-price" name="total-price">$0.00</span>
                 </div>
                 <div class="col">
-                    <button id="btnTshirt" class="btn"  onclick="add('tshirt')"><i class="fas fa-plus-circle"></i></button>
+                    <button id="btnTshirt" class="btn btn-succes"  onclick="add('tshirt')"><i class="fas fa-plus-circle"></i></button>
                     <button class="btn btn-delete"><i class="fas fa-minus-circle" onclick="minus('tshirt')" aria-hidden="true"></i></button>
                 </div>
             </div>
           </div>
 
           <div class="info-container">
-              <button class="btn btn-success" id="calc-prices-button">Calculate Prices</button>
+              <button class="btn btn-success" id="calc-prices-button" onclick="getTotalPrice()">Calculate Prices</button>
               <div onmouseover="this.style.backgroundColor='white'"  class="info-container">
                   <h1>Total Price <span id="gran-total">$0.00</span></h1>
               </div>

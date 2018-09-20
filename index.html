@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <title>Cabify Checkout </title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
@@ -13,20 +15,80 @@
 </nav>
   <section id="cart">
     <div>
-        <div class="items">
-          <p>
-              <span onmouseover="this.style.backgroundColor='white'" id="price" class="total">0</span>
-          </p>
-           
+    
+
+        <div class="info-container">
+            <h1>Cabify Shop</h1>
+        </div>
+        <div class="container" id="container">     
+            <div class="item" name="product">
+                <div class="col">
+                    <span name="name">Voucher</span>
+                </div>
+                <div class="col">
+                    <span class="price" name="price">$5.00</span>
+                </div>
+                <div class="col">
+                    <label>QTY</label>
+                    <input class="quantity voucher" type="number" name="voucher" value="0"/>
+                </div>
+                <div class="col">
+                    <span class="total-price" name="total-price">$0.00</span>
+                </div>
+                <div class="col">
+                    <button id="btnTshirt" class="btn"  onclick="add('voucher')"><i class="fas fa-plus-circle"></i></button>
+                    <button class="btn btn-delete"><i class="fas fa-minus-circle" onclick="minus('voucher')" aria-hidden="true"></i></button>
+                </div>
+            </div>
+            <div class="item" name="product">
+                <div class="col">
+                    <span name="name">MUG</span>
+                </div>
+                <div class="col">
+                    <span class="price" name="price">$7.5</span>
+                </div>
+                <div class="col">
+                    <label>QTY</label>
+                    <input class="quantity mug" type="number" name="mug" value="0"/>
+                </div>
+                <div class="col">
+                    <span class="total-price" name="total-price">$0.00</span>
+                </div>
+                <div class="col">
+                    <button id="btnTshirt" class="btn"  onclick="add('mug')"><i class="fas fa-plus-circle"></i></button>
+                    <button class="btn btn-delete"><i class="fas fa-minus-circle"  onclick="minus('mug')" aria-hidden="true"></i></button>
+                </div>
+            </div>
+            <div class="item" name="product">
+                <div class="col">
+                    <span name="name">T-shirt</span>
+                </div>
+                <div class="col">
+                    <span class="price" name="price">$20.00</span>
+                </div>
+                <div class="col">
+                    <label>QTY</label>
+                    <input class="quantity tshirt" type="number" name="tshirt" value="0"/>
+                </div>
+                <div class="col">
+                    <span class="total-price" name="total-price">$0.00</span>
+                </div>
+                <div class="col">
+                    <button id="btnTshirt" class="btn"  onclick="add('tshirt')"><i class="fas fa-plus-circle"></i></button>
+                    <button class="btn btn-delete"><i class="fas fa-minus-circle" onclick="minus('tshirt')" aria-hidden="true"></i></button>
+                </div>
+            </div>
           </div>
 
-        <div class="price">
-              <span id="price"></span>
-        </div>
-    
-          <button id="btnVoucher" class="btn voucher" onclick="add('VOUCHER')">ADD VOUCHER</button> 
-          <button id="btnMug" class="btn mug" onclick="add('MUG')" >ADD MUG</button>
-          <button id="btnTshirt" class="btn mug" onclick="add('TSHIRT')">ADD T-Shirt</button>
+          <div class="info-container">
+              <button class="btn btn-success" id="calc-prices-button">Calculate Prices</button>
+              <div onmouseover="this.style.backgroundColor='white'"  class="info-container">
+                  <h1>Total Price <span id="gran-total">$0.00</span></h1>
+              </div>
+          </div>
+        
+
+
       
     </div>
       

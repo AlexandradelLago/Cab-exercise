@@ -1,5 +1,4 @@
 // Examples:
-
 //     Items: VOUCHER, TSHIRT, MUG
 //     Total: 32.50€
 //     Items: VOUCHER, TSHIRT, VOUCHER
@@ -9,26 +8,24 @@
 //     Items: VOUCHER, TSHIRT, VOUCHER, VOUCHER, MUG, TSHIRT, TSHIRT
 //     Total: 74.50€
 
-function getTotalPrice() {
+function checkout() {
     var checkout = new Checkout();
-    let nVoucher = parseInt(document.getElementsByClassName("voucher")[0].value,10);
-    let nMug = parseInt(document.getElementsByClassName("mug")[0].value,10);
-    let nShirt = parseInt(document.getElementsByClassName("tshirt")[0].value,10);
-    
-   for (let index = 1; index <= nVoucher; index++) {
-    checkout.scan("VOUCHER"); 
-   }
-   for (let index = 1; index <= nMug; index++) {
-    checkout.scan("MUG"); 
-   }
-   for (let index = 1; index <= nShirt; index++) {
-    checkout.scan("TSHIRT"); 
-   }
-    console.log(checkout);   
+    // hago el scan de mis articulos sacandolos de mi html
+    scan(checkout);
+   // calculo el total del checkout
     let price = checkout.total();
-    console.log(price);
-    document.getElementById("gran-total").innerHTML="$" + price.toFixed(2)//imprime los prices
-    
+    // añado el precio en el html
+    document.getElementById("gran-total").innerHTML= price.toFixed(2)+ "€"//imprime los prices
+  }
+
+  function scan(cart){
+    cart.pricingrules.forEach(i=>{
+        console.log(i); 
+        let nItem = parseInt(document.getElementsByClassName(i.code)[0].value,10);
+        for (let index = 1; index <= nItem; index++) {
+            cart.scan(i.code); 
+           }
+    })
   }
 
   function add(item){

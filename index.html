@@ -15,88 +15,72 @@
 </nav>
   <section id="cart">
     <div>
-    
-
         <div class="info-container">
-            <h1>Cabify Shop</h1>
+               
+            <h1  style="color:white;">Cabify Shop</h1>
         </div>
         <div class="container" id="container">     
             <div class="item" name="product">
                 <div class="col">
-                    <span name="name">Voucher</span>
+                    <span name="name">Cabify Voucher</span>
                 </div>
                 <div class="col">
-                    <span class="price" name="price">$5.00</span>
+                    <span class="price" name="price">5.00€</span>
                 </div>
                 <div class="col">
                     <label>QTY</label>
-                    <input class="quantity voucher" type="number" name="voucher" value="0"/>
+                    <input class="quantity VOUCHER" type="number" name="voucher" value="0"/>
                 </div>
+             
                 <div class="col">
-                    <span class="total-price" name="total-price">$0.00</span>
-                </div>
-                <div class="col">
-                    <button id="btnTshirt" class="btn btn-succes"  onclick="add('voucher')"><i class="fas fa-plus-circle"></i></button>
-                    <button class="btn btn-delete"><i class="fas fa-minus-circle" onclick="minus('voucher')" aria-hidden="true"></i></button>
+                    <button id="btnTshirt" class="btn btn-succes"  onclick="add('VOUCHER')"><i class="fas fa-plus-circle"></i></button>
+                    <button class="btn btn-delete"><i class="fas fa-minus-circle" onclick="minus('VOUCHER')" aria-hidden="true"></i></button>
                 </div>
             </div>
             <div class="item" name="product">
                 <div class="col">
-                    <span name="name">MUG</span>
+                    <span name="name">Cabify Coffee Mug</span>
                 </div>
                 <div class="col">
-                    <span class="price" name="price">$7.5</span>
+                    <span class="price" name="price">7.5€</span>
                 </div>
                 <div class="col">
                     <label>QTY</label>
-                    <input class="quantity mug" type="number" name="mug" value="0"/>
+                    <input class="quantity MUG" type="number" name="mug" value="0"/>
                 </div>
+            
                 <div class="col">
-                    <span class="total-price" name="total-price">$0.00</span>
-                </div>
-                <div class="col">
-                    <button id="btnTshirt" class="btn btn-succes"  onclick="add('mug')"><i class="fas fa-plus-circle"></i></button>
-                    <button class="btn btn-delete"><i class="fas fa-minus-circle"  onclick="minus('mug')" aria-hidden="true"></i></button>
+                    <button id="btnTshirt" class="btn btn-succes"  onclick="add('MUG')"><i class="fas fa-plus-circle"></i></button>
+                    <button class="btn btn-delete"><i class="fas fa-minus-circle"  onclick="minus('MUG')" aria-hidden="true"></i></button>
                 </div>
             </div>
             <div class="item" name="product">
                 <div class="col">
-                    <span name="name">T-shirt</span>
+                    <span name="name">Cabify T-shirt</span>
                 </div>
                 <div class="col">
-                    <span class="price" name="price">$20.00</span>
+                    <span class="price" name="price">20.00€</span>
                 </div>
                 <div class="col">
                     <label>QTY</label>
-                    <input class="quantity tshirt" type="number" name="tshirt" value="0"/>
+                    <input class="quantity TSHIRT" type="number" name="tshirt" value="0"/>
                 </div>
+      
                 <div class="col">
-                    <span class="total-price" name="total-price">$0.00</span>
-                </div>
-                <div class="col">
-                    <button id="btnTshirt" class="btn btn-succes"  onclick="add('tshirt')"><i class="fas fa-plus-circle"></i></button>
-                    <button class="btn btn-delete"><i class="fas fa-minus-circle" onclick="minus('tshirt')" aria-hidden="true"></i></button>
+                    <button id="btnTshirt" class="btn btn-succes"  onclick="add('TSHIRT')"><i class="fas fa-plus-circle"></i></button>
+                    <button class="btn btn-delete"><i class="fas fa-minus-circle" onclick="minus('TSHIRT')" aria-hidden="true"></i></button>
                 </div>
             </div>
           </div>
 
           <div class="info-container">
-              <button class="btn btn-success" id="calc-prices-button" onclick="getTotalPrice()">Calculate Prices</button>
-              <div onmouseover="this.style.backgroundColor='white'"  class="info-container">
-                  <h1>Total Price <span id="gran-total">$0.00</span></h1>
+              <button class="btn btn-success" id="calc-prices-button" onclick="checkout()">Checkout</button>
+              <div onmouseover="this.style.backgroundColor='white'" onmouseout="this.style.backgroundColor='#7350ff'"   class="info-container">
+                  <h1 onmouseover="this.style.color='#7350ff'"onmouseout="this.style.color='white'"  style="color:white;">Total Price <span id="gran-total">0.00€</span></h1>
               </div>
           </div>
-        
-
-
-      
     </div>
-      
   </section>
-
- 
-
-
 </body>
 <script src="js/checkout.js"></script>
 <script src="js/main.js"></script>

@@ -1,10 +1,10 @@
 // Constructor
 
-//  Code         | Name                |  Price
-// -------------------------------------------------
-// VOUCHER      | Cabify Voucher      |   5.00€
-// TSHIRT       | Cabify T-Shirt      |  20.00€
-// MUG          | Cafify Coffee Mug   |   7.50€
+//  Code         | Name                |  Price       |discount
+// -----------------------------------------------------------------
+// VOUCHER      | Cabify Voucher      |   5.00€       |type:xby1, amount:2
+// TSHIRT       | Cabify T-Shirt      |  20.00€       |type:bulk, amount:3
+// MUG          | Cafify Coffee Mug   |   7.50€       |type:no, amount:0
 
 // he añadido un atributo a los objetos articulos de descuento que me indica que tipo de descuento debo aplicar
 // para hacer los descuentos más escalables he añadido la variable "amount" que en el caso de xby1 es la x y en el caso de bulk es 
@@ -19,7 +19,7 @@ function Checkout() {
     this.cart =[];
  }
  Checkout.prototype.scan = function (item) {
-    // si no tengo de ese producto lo añado, si no, subo su quantity
+    // si no tengo de ese producto lo añado a mi carrito, si no, subo su quantity
     if  (this.getProductfromCart(item)){
         (this.getProductfromCart(item)).quantity++;
     }else{
@@ -55,19 +55,23 @@ Checkout.prototype.getProductfromPricingRules= function (item){
 }
 //  * The marketing department believes in 2-for-1 promotions (buy two of the same product, get one free), 
 //  * and would like for there to be a 2-for-1 special on `VOUCHER` items.
-//  HE creado un metodo de descuento 2 por uno por si en el futuro queremos aplicarselo a otros productos
+//  HE creado un metodo de descuento 2 por uno por si en el futuro queremos aplicarselo a otros productos y que sea 
+// otra variante , 3x1 por ejemplo se puede hacer simplemente cambiando el valor de x
 Checkout.prototype.xByOneDiscount = function (i,x){
     let items= this.getProductfromCart(i)
+    // divido por x asi se cuantos grupos de descuento tengo y añado los restantes
     let itemsTotal= Math.floor((items.quantity/x))+items.quantity%x;
+    // si tengo algun item entonces devuelvo el precio
     return itemsTotal*this.getProductfromPricingRules(i).price? itemsTotal*this.getProductfromPricingRules(i).price:0;
 }
 //  * The CFO insists that the best way to increase sales is with discounts on bulk purchases
 //  *  (buying x or more of a product, the price of that product is reduced), and demands that if you buy 3 or more 
 //  * `TSHIRT` items, the price per unit should be 19.00€.
+
 // creo metodo tambien por la misma razon que arriba
 Checkout.prototype.bulkDiscount = function (i,x){
     let items= this.getProductfromCart(i);
-    // compruebo si tengo 3 o mas de tres en mi  checkout para aplicar el precio de descuento o no
+    // compruebo si tengo x o mas de tres en mi  checkout para aplicar el precio de descuento o no
     if (items&&items.quantity>=x){
       return items.quantity*this.getProductfromPricingRules(i).priceMoreThanX;
     }else if(items&&items.quantity<x&&items.quantity>0){
@@ -77,9 +81,10 @@ Checkout.prototype.bulkDiscount = function (i,x){
     }
 }
 Checkout.prototype.regularPrice = function (i){
-    let mugs=this.getProductfromCart(i);
-    if(mugs!=undefined){
-       return mugs.quantity*this.getProductfromPricingRules(i).price;
+    // funcion para calcular el precio de item cuando no tienen descuento 
+    let items=this.getProductfromCart(i);
+    if(items!=undefined){
+       return items.quantity*this.getProductfromPricingRules(i).price;
     }else{
         return 0;
     }

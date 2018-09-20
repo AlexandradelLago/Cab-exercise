@@ -13,11 +13,11 @@ function Store() {
     
  Store.prototype.getProduct = function (code) {
     return this.products.filter(function(p){return p.code == code })[0];
-    
+ 
  };
  
   Store.prototype.getProductPrice = function () {
-    return this.products.filter(function (p) { return p.Code == code })[0].Price;
+    return this.products.filter(function (p) { return p.code == code })[0].price;
  };
  
  

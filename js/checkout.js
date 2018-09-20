@@ -7,9 +7,14 @@
 // MUG          | Cafify Coffee Mug   |   7.50€
 
 // he añadido un atributo a los objetos articulos de descuento que me indica que tipo de descuento debo aplicar
-let pricingRules=[{"code":"VOUCHER", "name":"Cabify Voucher", "price":5, "discount":"2x1"},
-{"code":"TSHIRT", "name":"Cabify T-shirt", "price":20, "discount":"+3", "priceMoreThan3":19},
-{"code":"MUG", "name":"Cabify Mug","discount":"no", "price":7.5}];
+// para hacer los descuentos más escalables he añadido la variable "amount" que en el caso de xby1 es la x y en el caso de bulk es 
+//la minima cantidad a comprar para que se aplique el descuento
+// { Type: DiscountType.Multiplier, Amount: 2 }
+// { Type: DiscountType.Discounter, Amount: 3 }
+
+let pricingRules=[{"code":"VOUCHER", "name":"Cabify Voucher", "price":5, "discount":{"type":"xby1", "amount":2}},
+{"code":"TSHIRT", "name":"Cabify T-shirt", "price":20, "discount":{"type":"bulk", "amount":3},"priceMoreThanX":19},
+{"code":"MUG", "name":"Cabify Mug","discount":{"type":"no", "amount":0},"price":7.5}];
 
 function Checkout() {
     this.pricingrules = pricingRules;
@@ -28,12 +33,14 @@ function Checkout() {
 Checkout.prototype.total = function () {
    let total=0;
    this.cart.forEach((i)=>{
-    switch (this.getProductfromPricingRules(i.code).discount) {
-        case "2x1":
-            total+=this.twoByOneDiscount(i.code);
+     let amount=this.getProductfromPricingRules(i.code).discount.amount;
+     let discount= this.getProductfromPricingRules(i.code).discount.type;
+    switch (discount) {
+        case "xby1":
+            total+=this.xByOneDiscount(i.code,amount);
             break;
-        case "+3":
-            total+=this.bulkDiscount(i.code);
+        case "bulk":
+            total+=this.bulkDiscount(i.code,amount);
             break;
         default:
             total+=this.regularPrice(i.code);
@@ -51,21 +58,21 @@ Checkout.prototype.getProductfromPricingRules= function (item){
 //  * The marketing department believes in 2-for-1 promotions (buy two of the same product, get one free), 
 //  * and would like for there to be a 2-for-1 special on `VOUCHER` items.
 //  HE creado un metodo de descuento 2 por uno por si en el futuro queremos aplicarselo a otros productos
-Checkout.prototype.twoByOneDiscount = function (i){
+Checkout.prototype.xByOneDiscount = function (i,x){
     let items= this.getProductfromCart(i)
-    let itemsTotal= Math.floor((items.quantity/2))+items.quantity%2;
+    let itemsTotal= Math.floor((items.quantity/x))+items.quantity%x;
     return itemsTotal*this.getProductfromPricingRules(i).price? itemsTotal*this.getProductfromPricingRules(i).price:0;
 }
 //  * The CFO insists that the best way to increase sales is with discounts on bulk purchases
 //  *  (buying x or more of a product, the price of that product is reduced), and demands that if you buy 3 or more 
 //  * `TSHIRT` items, the price per unit should be 19.00€.
 // creo metodo tambien por la misma razon que arriba
-Checkout.prototype.bulkDiscount = function (i){
+Checkout.prototype.bulkDiscount = function (i,x){
     let items= this.getProductfromCart(i);
     // compruebo si tengo 3 o mas de tres en mi  checkout para aplicar el precio de descuento o no
-    if (items&&items.quantity>=3){
-      return items.quantity*this.getProductfromPricingRules(i).priceMoreThan3;
-    }else if(items&&items.quantity<3&&items.quantity>0){
+    if (items&&items.quantity>=x){
+      return items.quantity*this.getProductfromPricingRules(i).priceMoreThanX;
+    }else if(items&&items.quantity<x&&items.quantity>0){
       return items.quantity*this.getProductfromPricingRules(i).price;
     }else{
         return 0;

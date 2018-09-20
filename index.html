@@ -8,28 +8,34 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-
-  <section id="total">
-    <h3></h3>
-    <ol id="total">
-    </ol>
-  </section>
-
-
+<nav>
+  <img styles="height:10vh" src="css/images/cabifylogo.jpg" alt="">
+</nav>
   <section id="cart">
     <div>
-        <div id="price">
-            <span id="total" class="total">0</span>
+        <div class="items">
+          <p>
+              <span onmouseover="this.style.backgroundColor='white'" id="price" class="total">0</span>
+          </p>
+           
           </div>
-          <button id="btnVoucher" class="btn voucher">ADD VOUCHER</button> 
-          <button id="btnMug" class="btn mug">ADD MUG</button>
-          <button id="btnTshirt" class="btn mug">ADD T-Shirt</button>
+
+        <div class="price">
+              <span id="price"></span>
+        </div>
+    
+          <button id="btnVoucher" class="btn voucher" onclick="add('VOUCHER')">ADD VOUCHER</button> 
+          <button id="btnMug" class="btn mug" onclick="add('MUG')" >ADD MUG</button>
+          <button id="btnTshirt" class="btn mug" onclick="add('TSHIRT')">ADD T-Shirt</button>
+      
     </div>
+      
   </section>
 
  
 
-  <script src="js/checkout.js"></script>
-  <script src="js/main.js"></script>
+
 </body>
+<script src="js/checkout.js"></script>
+<script src="js/main.js"></script>
 </html>

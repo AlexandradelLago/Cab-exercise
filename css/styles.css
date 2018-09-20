@@ -14,15 +14,21 @@ html {
     -webkit-text-size-adjust: 100%}
 body {
     margin: 0;
-    background: greenyellow;
+    background: #7350ff;
 }
  menu, article, aside, details, footer, header, nav, section {
     display: block;
 }
-h1 {
-    font-size: 2em;
-    margin: .67em 0;
+
+nav {
+    height: 10vh;
+    width: 100vw;
+    background-color: white;
 }
+nav img{
+   width: 10vh; 
+}
+
 
 
 @font-face {
@@ -37,3 +43,8 @@ h1 {
     padding: 40px 0;
   }
 
+.items{
+    margin-top:10vh;
+    margin-left: 10vh;
+    font-size: 1em;
+}

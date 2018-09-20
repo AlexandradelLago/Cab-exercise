@@ -11,13 +11,17 @@
 
 //     Items: VOUCHER, TSHIRT, VOUCHER, VOUCHER, MUG, TSHIRT, TSHIRT
 //     Total: 74.50€
-    
-
 var checkout = new Checkout();
-checkout.scan("VOUCHER").scan("MUG").scan("TSHIRT").scan("TSHIRT").scan("TSHIRT").scan("VOUCHER").scan("VOUCHER");
+// tests
+checkout.scan("VOUCHER").scan("TSHIRT").scan("MUG");
+//checkout.scan("VOUCHER").scan("TSHIRT").scan("VOUCHER");
+//checkout.scan("TSHIRT").scan("TSHIRT").scan("TSHIRT").scan("VOUCHER").scan("TSHIRT");
+//checkout.scan("VOUCHER").scan("MUG").scan("TSHIRT").scan("TSHIRT").scan("TSHIRT").scan("VOUCHER").scan("VOUCHER");
 console.log(checkout)
-let price= checkout.total();
-console.log(price)
+document.getElementById("price").innerHTML= checkout.total()+" this is your final price";
+
+
+
 
 
 

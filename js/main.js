@@ -24,11 +24,6 @@ function getTotalPrice() {
    for (let index = 1; index <= nShirt; index++) {
     checkout.scan("TSHIRT"); 
    }
-  
- //checkout.scan("VOUCHER").scan("TSHIRT").scan("MUG");
-//checkout.scan("VOUCHER").scan("TSHIRT").scan("VOUCHER");
-//checkout.scan("TSHIRT").scan("TSHIRT").scan("TSHIRT").scan("VOUCHER").scan("TSHIRT");
-//checkout.scan("VOUCHER").scan("MUG").scan("TSHIRT").scan("TSHIRT").scan("TSHIRT").scan("VOUCHER").scan("VOUCHER");
     console.log(checkout);   
     let price = checkout.total();
     console.log(price);

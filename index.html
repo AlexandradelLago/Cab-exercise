@@ -19,6 +19,10 @@
                
             <h1  style="color:white;">Cabify Shop</h1>
         </div>
+
+        <table>
+            
+        </table>
         <div class="container" id="container">     
             <div class="item" name="product">
                 <div class="col">
@@ -33,8 +37,8 @@
                 </div>
              
                 <div class="col">
-                    <button id="btnTshirt" class="btn btn-success"  onclick="add('VOUCHER')"><i class="fas fa-plus-circle"></i></button>
-                    <button class="btn btn-delete"><i class="fas fa-minus-circle" onclick="minus('VOUCHER')" aria-hidden="true"></i></button>
+                    <button id="voucherAdd" class="btn btn-success"><i class="fas fa-plus-circle"></i></button>
+                    <button id="voucherLess" class="btn btn-delete"><i class="fas fa-minus-circle" aria-hidden="true"></i></button>
                 </div>
             </div>
             <div class="item" name="product">
@@ -50,8 +54,8 @@
                 </div>
             
                 <div class="col">
-                    <button id="btnTshirt" class="btn btn-success"  onclick="add('MUG')"><i class="fas fa-plus-circle"></i></button>
-                    <button class="btn btn-delete"><i class="fas fa-minus-circle"  onclick="minus('MUG')" aria-hidden="true"></i></button>
+                    <button id="mugAdd" class="btn btn-success"><i class="fas fa-plus-circle"></i></button>
+                    <button id="mugLess"class="btn btn-delete"><i class="fas fa-minus-circle" aria-hidden="true"></i></button>
                 </div>
             </div>
             <div class="item" name="product">
@@ -67,14 +71,14 @@
                 </div>
       
                 <div class="col">
-                    <button id="btnTshirt" class="btn btn-success"  onclick="add('TSHIRT')"><i class="fas fa-plus-circle"></i></button>
-                    <button class="btn btn-delete"><i class="fas fa-minus-circle" onclick="minus('TSHIRT')" aria-hidden="true"></i></button>
+                    <button id="tshirtAdd" class="btn btn-success" ><i class="fas fa-plus-circle"></i></button>
+                    <button id="tshirtLess" class="btn btn-delete"><i class="fas fa-minus-circle" aria-hidden="true"></i></button>
                 </div>
             </div>
           </div>
 
           <div class="info-container">
-              <button class="btn btn-success" id="calc-prices-button" onclick="checkout()">Checkout</button>
+              <button class="btn btn-success" id="calc-prices-button">Checkout</button>
               <div onmouseover="this.style.backgroundColor='white'" onmouseout="this.style.backgroundColor='#7350ff'"   class="info-container">
                   <h1 onmouseover="this.style.color='#7350ff'"onmouseout="this.style.color='white'"  style="color:white;">Total Price <span id="gran-total">0.00€</span></h1>
               </div>
@@ -82,6 +86,7 @@
     </div>
   </section>
 </body>
+<script src="js/utils.js"></script>
 <script src="js/checkout.js"></script>
 <script src="js/main.js"></script>
 </html>

@@ -22,8 +22,10 @@ function runCheckout() {
     document.getElementById("gran-total").innerHTML= price.toFixed(2)+ "€"//imprime los prices
   }
 
-  function addEvents(){
-     // añadir jquery y ver la ??
+function addEvents(){
+   // si lo hago con js nativo usaria lo siguiente
+    // document.getElementsByClass("buttonAdd").addEventListener("click",function(e){utils.add(e.currentTarget.value,1)},false); 
+     // document.getElementsByClass("buttonLess").addEventListener("click",function(e){utils.add(e.currentTarget.value,-1)},false);   
     $('.buttonAdd').click(function (e) {
          utils.add(e.currentTarget.value,1)
     })
@@ -33,24 +35,14 @@ function runCheckout() {
   }
   
 window.onload = function(){
-
   var ruta="data.json";
   //get JSON
   $.getJSON(ruta, function(data) {
     store = new Store(data);
     addEvents();
-
 	});
- 
-
-    // document.getElementById("tshirtAdd").addEventListener("click",function(){utils.add("TSHIRT")},false);  
-    // document.getElementById("voucherAdd").addEventListener("click",function(){utils.add("VOUCHER")},false);  
-    // document.getElementById("mugAdd").addEventListener("click",function(){utils.add("MUG")},false);  
-    // document.getElementById("tshirtLess").addEventListener("click",function(){utils.minus("TSHIRT")},false); 
-    // document.getElementById("voucherLess").addEventListener("click",function(){utils.minus("VOUCHER")},false);  
-    // document.getElementById("mugLess").addEventListener("click",function(){utils.minus("MUG")},false);   
     document.getElementById("calc-prices-button").addEventListener("click",runCheckout,false);   
-  };
+};
 
 
 

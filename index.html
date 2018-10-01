@@ -8,6 +8,7 @@
    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
   <title>Cabify Checkout </title>
   <link rel="stylesheet" href="css/styles.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 <nav>
@@ -19,10 +20,6 @@
                
             <h1  style="color:white;">Cabify Shop</h1>
         </div>
-
-        <table>
-            
-        </table>
         <div class="container" id="container">     
             <div class="item" name="product">
                 <div class="col">
@@ -33,12 +30,12 @@
                 </div>
                 <div class="col">
                     <label>QTY</label>
-                    <input class="quantity VOUCHER" type="number" name="voucher" value="0"/>
+                    <input class="quantity" id="input-VOUCHER" type="number" name="voucher" value="0"/>
                 </div>
              
                 <div class="col">
-                    <button id="voucherAdd" class="btn btn-success"><i class="fas fa-plus-circle"></i></button>
-                    <button id="voucherLess" class="btn btn-delete"><i class="fas fa-minus-circle" aria-hidden="true"></i></button>
+                    <button class="buttonAdd btn btn-success" value="voucher"><i class="fas fa-plus-circle"></i></button>
+                    <button class="buttonLess btn btn-delete" value="voucher"><i class="fas fa-minus-circle" aria-hidden="true"></i></button>
                 </div>
             </div>
             <div class="item" name="product">
@@ -50,12 +47,12 @@
                 </div>
                 <div class="col">
                     <label>QTY</label>
-                    <input class="quantity MUG" type="number" name="mug" value="0"/>
+                    <input class="quantity" id="input-MUG" type="number" name="mug" value="0"/>
                 </div>
             
                 <div class="col">
-                    <button id="mugAdd" class="btn btn-success"><i class="fas fa-plus-circle"></i></button>
-                    <button id="mugLess"class="btn btn-delete"><i class="fas fa-minus-circle" aria-hidden="true"></i></button>
+                    <button class="buttonAdd btn btn-success" value="mug" ><i class="fas fa-plus-circle"></i></button>
+                    <button class="buttonLess btn btn-delete" value="mug" ><i class="fas fa-minus-circle" aria-hidden="true"></i></button>
                 </div>
             </div>
             <div class="item" name="product">
@@ -67,12 +64,12 @@
                 </div>
                 <div class="col">
                     <label>QTY</label>
-                    <input class="quantity TSHIRT" type="number" name="tshirt" value="0"/>
+                    <input class="quantity" id="input-TSHIRT" type="number" name="tshirt" value="0"/>
                 </div>
       
                 <div class="col">
-                    <button id="tshirtAdd" class="btn btn-success" ><i class="fas fa-plus-circle"></i></button>
-                    <button id="tshirtLess" class="btn btn-delete"><i class="fas fa-minus-circle" aria-hidden="true"></i></button>
+                    <button class="buttonAdd btn btn-success"value="tshirt"><i class="fas fa-plus-circle"></i></button>
+                    <button class="buttonLess btn btn-delete" value="tshirt"><i class="fas fa-minus-circle" aria-hidden="true"></i></button>
                 </div>
             </div>
           </div>
@@ -86,6 +83,7 @@
     </div>
   </section>
 </body>
+<script src="js/store.js"></script>
 <script src="js/utils.js"></script>
 <script src="js/checkout.js"></script>
 <script src="js/main.js"></script>

@@ -1,18 +1,15 @@
 const utils = {
-    add : function(item){
-            let quantity = parseInt(document.getElementsByClassName(item)[0].value,10);
-            quantity+=1;
-            document.getElementsByClassName(item)[0].value=quantity;
+    add : function(item,i){
+            let quantity = parseInt(document.getElementsByName(item)[0].value,10);
+
+            quantity+=i;
+            if (quantity<0){
+                quantity=0;
+            }
+            document.getElementsByName(item)[0].value=quantity;
             console.log(quantity);
       },
-    minus :function(item){
-        let quantity = parseInt(document.getElementsByClassName(item)[0].value,10);
-        if (quantity>0){
-            quantity-=1;
-        }
-        document.getElementsByClassName(item)[0].value=quantity;
-        console.log(quantity);
-    },
+ 
     
     //**************************************************************************************** */
     

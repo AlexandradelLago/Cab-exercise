@@ -14,44 +14,32 @@ const pricingRules=[{"code":"VOUCHER", "name":"Cabify Voucher", "price":5, "disc
 {"code":"MUG", "name":"Cabify Mug","discount":{"type":"no", "amount":0},"price":7.5}];
 
 class Checkout {
-    constructor(){
-        this.pricingrules = pricingRules;
+    constructor(store){
+        this.store = store;
         this.cart =[];
     } 
-
 scan(){
-        this.pricingrules.forEach(i=>{
-            console.log(i); 
-            let nItem = parseInt(document.getElementsByClassName(i.code)[0].value,10);
-            for (let index = 1; index <= nItem; index++) {
-                this.addToCart(i.code); 
-               }
-        })
-      }; 
- addToCart(item) {
-    // si no tengo de ese producto lo añado a mi carrito, si no, subo su quantity
-    if  (this.getProductfromCart(item)){
-        (this.getProductfromCart(item)).quantity++;
-    }else{
-        this.cart.push({code:item,quantity:1});
-    }
-    return this;
- };
-
+    Array.from(document.getElementsByClassName("quantity")).filter(i=>{
+        return parseInt(i.value) > 0;
+    }).forEach(domElem => { 
+        this.cart.push({ code: domElem.id.split('-')[1], quantity: parseInt(domElem.value)}) 
+    });
+}; 
  total() {
    let total=0;
    this.cart.forEach((i)=>{
-     let amount=this.getProductfromPricingRules(i.code).discount.amount;
-     let discount= this.getProductfromPricingRules(i.code).discount.type;
+     let amount=this.store.get(i.code).discount.amount;
+     let discount= this.store.get(i.code).discount.type;
+     let items= this.getProductfromCart(i.code)
     switch (discount) {
         case "xby1":
-            total+=this.xByOneDiscount(i.code,amount);
+            total+=this.xByOneDiscount(items,amount);
             break;
         case "bulk":
-            total+=this.bulkDiscount(i.code,amount);
+            total+=this.bulkDiscount(items,amount);
             break;
         default:
-            total+=this.regularPrice(i.code);
+            total+=this.regularPrice(items);
             break;
     }
    });
@@ -62,41 +50,38 @@ return total;
 getProductfromCart(item){
     return this.cart.filter(function(i){return i.code==item})[0];
 }
-getProductfromPricingRules(item){
-    return this.pricingrules.filter(function(r){return r.code==item})[0];
-}
+
 //  * The marketing department believes in 2-for-1 promotions (buy two of the same product, get one free), 
 //  * and would like for there to be a 2-for-1 special on `VOUCHER` items.
 //  HE creado un metodo de descuento 2 por uno por si en el futuro queremos aplicarselo a otros productos y que sea 
 // otra variante , 3x1 por ejemplo se puede hacer simplemente cambiando el valor de x
-xByOneDiscount(i,x){
-    let items= this.getProductfromCart(i)
+xByOneDiscount(items,x){
+ 
     // divido por x asi se cuantos grupos de descuento tengo y añado los restantes
     let itemsTotal= Math.floor((items.quantity/x)) + items.quantity % x;
     // si tengo algun item entonces devuelvo el precio
-    return itemsTotal*this.getProductfromPricingRules(i).price? itemsTotal*this.getProductfromPricingRules(i).price:0;
+    return itemsTotal*this.store.get(items.code).price? itemsTotal*this.store.get(items.code).price:0;
 }
 //  * The CFO insists that the best way to increase sales is with discounts on bulk purchases
 //  *  (buying x or more of a product, the price of that product is reduced), and demands that if you buy 3 or more 
 //  * `TSHIRT` items, the price per unit should be 19.00€.
 
 // creo metodo tambien por la misma razon que arriba
-bulkDiscount(i,x){
-    let items= this.getProductfromCart(i);
+bulkDiscount(items,x){
+  
     // compruebo si tengo x o mas de tres en mi  checkout para aplicar el precio de descuento o no
     if (items&&items.quantity>=x){
-      return items.quantity*this.getProductfromPricingRules(i).priceMoreThanX;
+      return items.quantity*this.store.get(items.code).priceMoreThanX;
     }else if(items&&items.quantity<x&&items.quantity>0){
-      return items.quantity*this.getProductfromPricingRules(i).price;
+      return items.quantity*this.store.get(items.code).price;
     }else{
         return 0;
     }
 }
-regularPrice(i){
+regularPrice(items){
     // funcion para calcular el precio de item cuando no tienen descuento 
-    let items=this.getProductfromCart(i);
     if(items!=undefined){
-       return items.quantity*this.getProductfromPricingRules(i).price;
+       return items.quantity*this.store.get(items.code).price;
     }else{
         return 0;
     } 
